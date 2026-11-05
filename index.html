@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Núcleo Costero · Banca exterior modular</title>
+<meta name="description" content="Banca exterior para patio, terraza o balcón que no se pudre, no se pinta y se arregla por piezas. Producto en desarrollo: únete a la lista de interés.">
+<!-- MEDICIÓN: pegar aquí el script de GoatCounter, Plausible o Google Analytics (ver Anexo del informe). -->
+<style>
+  :root {
+    --mar: #1f5560;
+    --mar-osc: #163f48;
+    --arena: #f6efe3;
+    --arena-osc: #e9dcc4;
+    --texto: #1f2d32;
+    --suave: #5b6b70;
+    --ok: #2f7d4f;
+    --borde: #d8cdb8;
+    --blanco: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Segoe UI", Roboto, Arial, Helvetica, sans-serif; color: var(--texto); background: var(--blanco); line-height: 1.5; }
+  a { color: var(--mar); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  header { background: var(--blanco); border-bottom: 1px solid var(--borde); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-weight: 800; font-size: 20px; letter-spacing: .3px; color: var(--mar); }
+  .logo span { color: #b08a4a; }
+  nav a { margin-left: 20px; text-decoration: none; font-size: 15px; color: var(--texto); }
+  .hero { background: var(--arena); padding: 48px 0 40px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 36px; align-items: center; }
+  .eyebrow { display: inline-block; background: var(--mar); color: var(--blanco); font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 99px; letter-spacing: .4px; }
+  h1 { font-size: 40px; line-height: 1.12; margin: 14px 0 12px; }
+  .lead { font-size: 18px; color: var(--suave); margin: 0 0 20px; }
+  .price-card { background: var(--blanco); border: 1px solid var(--borde); border-radius: 14px; padding: 16px 18px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .price { font-size: 32px; font-weight: 800; }
+  .price small { display: block; font-size: 13px; font-weight: 400; color: var(--suave); }
+  .btn { display: inline-block; background: var(--mar); color: var(--blanco); font-weight: 700; font-size: 17px; padding: 13px 22px; border-radius: 10px; text-decoration: none; border: 0; cursor: pointer; }
+  .btn:hover { background: var(--mar-osc); }
+  .fine { font-size: 13px; color: var(--suave); margin-top: 8px; }
+  .hero-img { background: var(--blanco); border-radius: 16px; padding: 14px; border: 1px solid var(--borde); }
+  .hero-img svg { width: 100%; height: auto; display: block; }
+  .ticks { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .ticks li { background: var(--blanco); border-radius: 10px; padding: 10px 12px; font-size: 14px; font-weight: 600; border: 1px solid var(--borde); }
+  .ticks li::before { content: "✓ "; color: var(--ok); font-weight: 800; }
+  section { padding: 48px 0; }
+  h2 { font-size: 28px; margin: 0 0 8px; }
+  .sub { color: var(--suave); margin: 0 0 24px; font-size: 17px; }
+  table.cmp { width: 100%; border-collapse: collapse; font-size: 16px; }
+  table.cmp th, table.cmp td { padding: 12px 14px; border-bottom: 1px solid var(--borde); text-align: left; vertical-align: top; }
+  table.cmp thead th { font-size: 15px; background: var(--arena); }
+  table.cmp thead th.us { background: var(--mar); color: var(--blanco); }
+  table.cmp td.us { background: #eef5f5; font-weight: 600; }
+  table.cmp tr.total td { font-size: 18px; font-weight: 800; border-bottom: 0; }
+  details { margin-top: 16px; background: var(--arena); border-radius: 10px; padding: 12px 16px; }
+  summary { font-weight: 700; cursor: pointer; }
+  .pieces { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+  .piece { border: 2px solid var(--borde); border-radius: 12px; padding: 14px 16px; cursor: pointer; background: var(--blanco); text-align: left; font: inherit; color: inherit; }
+  .piece[aria-pressed="true"] { border-color: var(--mar); background: #eef5f5; }
+  .piece b { display: block; font-size: 17px; }
+  .piece .p { display: block; font-size: 22px; font-weight: 800; color: var(--mar); }
+  .piece .d { display: block; font-size: 14px; color: var(--suave); }
+  .alt { background: var(--arena); }
+  .material { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .material div { background: var(--blanco); border-radius: 12px; padding: 16px; border: 1px solid var(--borde); font-size: 15px; }
+  .material b { display: block; font-size: 16px; margin-bottom: 4px; }
+  form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; background: var(--blanco); border: 1px solid var(--borde); border-radius: 14px; padding: 22px; }
+  label { font-weight: 600; font-size: 15px; display: block; margin-bottom: 4px; }
+  input[type=text], input[type=tel], select { width: 100%; font: inherit; padding: 10px 12px; border: 1px solid var(--borde); border-radius: 8px; background: var(--blanco); }
+  .full { grid-column: 1 / -1; }
+  .radio-row label { display: inline-flex; align-items: center; gap: 6px; font-weight: 400; margin-right: 18px; }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: 14px; }
+  .ok-box { display: none; background: #e8f4ec; border: 1px solid #b9dcc5; border-radius: 12px; padding: 18px; margin-top: 16px; }
+  footer { background: var(--mar-osc); color: #cfe0e2; font-size: 14px; padding: 24px 0; }
+  @media (max-width: 820px) {
+    .hero .wrap, .material, .pieces, form { grid-template-columns: 1fr; }
+    h1 { font-size: 30px; }
+    nav { display: none; }
+    .ticks { grid-template-columns: 1fr; }
+    table.cmp { font-size: 14px; }
+    table.cmp th, table.cmp td { padding: 9px 8px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">Núcleo <span>Costero</span></div>
+    <nav><a href="#duracion">Cuánto dura</a><a href="#piezas">Piezas</a><a href="#lista">Lista de interés</a></nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">EN DESARROLLO · LISTA DE INTERÉS</span>
+      <h1>La banca para tu patio que no se pudre, no se pinta y se arregla por piezas.</h1>
+      <p class="lead">Banca exterior modular para 3 personas, para patio, terraza o balcón. Pensada para sol, lluvia y aire salino, con garantía escrita de 5 años a la intemperie.</p>
+      <div class="price-card">
+        <div class="price">$84.000<small>Precio estimado de lanzamiento · banca de 1,2 m</small></div>
+        <a class="btn" href="#lista" data-track="cta_hero">Quiero que me avisen</a>
+      </div>
+      <p class="fine">Aún no la vendemos: estamos midiendo el interés antes de fabricar. Inscribirte no tiene costo ni te obliga a comprar.</p>
+      <ul class="ticks">
+        <li>Sin lijar ni barnizar</li>
+        <li>Repuesto por pieza</li>
+        <li>Garantía 5 años</li>
+      </ul>
+    </div>
+    <div class="hero-img"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 930 345" role="img" aria-label="Despiece de la banca: 3 tablas de asiento, 2 patas laterales y 8 pernos"><polygon points="120.0,175.0 166.75,142.7 210.75,142.7 164.0,175.0" fill="#879da4" stroke="#2b3a3f" stroke-width="1.2"/>
+<polygon points="164.0,175.0 210.75,142.7 210.75,262.7 164.0,295.0" fill="#4a6168" stroke="#2b3a3f" stroke-width="1.2"/>
+<rect x="120.0" y="175.0" width="44" height="120" fill="#5f7d86" stroke="#2b3a3f" stroke-width="1.2"/>
+<line x1="120" y1="215.0" x2="164" y2="215.0" stroke="#2b3a3f" stroke-width="0.6" opacity="0.5"/>
+<line x1="120" y1="255.0" x2="164" y2="255.0" stroke="#2b3a3f" stroke-width="0.6" opacity="0.5"/>
+<polygon points="470.0,175.0 516.75,142.7 560.75,142.7 514.0,175.0" fill="#879da4" stroke="#2b3a3f" stroke-width="1.2"/>
+<polygon points="514.0,175.0 560.75,142.7 560.75,262.7 514.0,295.0" fill="#4a6168" stroke="#2b3a3f" stroke-width="1.2"/>
+<rect x="470.0" y="175.0" width="44" height="120" fill="#5f7d86" stroke="#2b3a3f" stroke-width="1.2"/>
+<line x1="470" y1="215.0" x2="514" y2="215.0" stroke="#2b3a3f" stroke-width="0.6" opacity="0.5"/>
+<line x1="470" y1="255.0" x2="514" y2="255.0" stroke="#2b3a3f" stroke-width="0.6" opacity="0.5"/>
+<line x1="154.1" y1="86.63999999999999" x2="154.1" y2="163.64" stroke="#2b3a3f" stroke-dasharray="4 4" stroke-width="1.2"/>
+<circle cx="154.1" cy="166.64" r="4.5" fill="#d9dde0" stroke="#2b3a3f" stroke-width="1.2"/>
+<line x1="176.1" y1="71.44" x2="176.1" y2="148.44" stroke="#2b3a3f" stroke-dasharray="4 4" stroke-width="1.2"/>
+<circle cx="176.1" cy="151.44" r="4.5" fill="#d9dde0" stroke="#2b3a3f" stroke-width="1.2"/>
+<line x1="504.1" y1="86.63999999999999" x2="504.1" y2="163.64" stroke="#2b3a3f" stroke-dasharray="4 4" stroke-width="1.2"/>
+<circle cx="504.1" cy="166.64" r="4.5" fill="#d9dde0" stroke="#2b3a3f" stroke-width="1.2"/>
+<line x1="526.1" y1="71.44" x2="526.1" y2="148.44" stroke="#2b3a3f" stroke-dasharray="4 4" stroke-width="1.2"/>
+<circle cx="526.1" cy="151.44" r="4.5" fill="#d9dde0" stroke="#2b3a3f" stroke-width="1.2"/>
+<polygon points="91.9,59.96 105.10000000000001,50.84 645.1,50.84 631.9,59.96" fill="#d6c6a7" stroke="#2b3a3f" stroke-width="1.2"/>
+<polygon points="631.9,59.96 645.1,50.84 645.1,63.84 631.9,72.96000000000001" fill="#9c8c6b" stroke="#2b3a3f" stroke-width="1.2"/>
+<rect x="91.9" y="59.96" width="540" height="13" fill="#c9b48a" stroke="#2b3a3f" stroke-width="1.2"/>
+<polygon points="75.95,70.98 89.15,61.86 629.1500000000001,61.86 615.95,70.98" fill="#d6c6a7" stroke="#2b3a3f" stroke-width="1.2"/>
+<polygon points="615.95,70.98 629.1500000000001,61.86 629.1500000000001,74.86 615.95,83.98" fill="#9c8c6b" stroke="#2b3a3f" stroke-width="1.2"/>
+<rect x="75.95" y="70.98" width="540" height="13" fill="#c9b48a" stroke="#2b3a3f" stroke-width="1.2"/>
+<polygon points="60.0,82.0 73.2,72.88 613.2,72.88 600.0,82.0" fill="#d6c6a7" stroke="#2b3a3f" stroke-width="1.2"/>
+<polygon points="600.0,82.0 613.2,72.88 613.2,85.88 600.0,95.0" fill="#9c8c6b" stroke="#2b3a3f" stroke-width="1.2"/>
+<rect x="60.0" y="82.0" width="540" height="13" fill="#c9b48a" stroke="#2b3a3f" stroke-width="1.2"/>
+<text x="690" y="56" font-family="Arial, Helvetica, sans-serif" fill="#1f2d32" font-size="17" font-weight="700">3 tablas de asiento</text>
+<text x="690" y="77" font-family="Arial, Helvetica, sans-serif" fill="#1f2d32" font-size="15">Repuesto: $9.000 c/u</text>
+<text x="690" y="150" font-family="Arial, Helvetica, sans-serif" fill="#1f2d32" font-size="17" font-weight="700">8 pernos inoxidables</text>
+<text x="690" y="171" font-family="Arial, Helvetica, sans-serif" fill="#1f2d32" font-size="15">Se arma con 1 llave</text>
+<text x="690" y="232" font-family="Arial, Helvetica, sans-serif" fill="#1f2d32" font-size="17" font-weight="700">2 patas laterales</text>
+<text x="690" y="253" font-family="Arial, Helvetica, sans-serif" fill="#1f2d32" font-size="15">Repuesto: $18.000 c/u</text>
+<text x="60" y="330" font-family="Arial, Helvetica, sans-serif" fill="#1f2d32" font-size="14" font-style="italic">Núcleo: plástico costero (PE/PP) · Piel: PE reciclado con aditivo UV y color integrado</text></svg></div>
+  </div>
+</div>
+
+<section id="duracion">
+  <div class="wrap">
+    <h2>¿Cuánto te cuesta tu banca en 5 años?</h2>
+    <p class="sub">Compárala con la banca de madera tratada que probablemente ya conoces.</p>
+    <table class="cmp">
+      <thead><tr><th></th><th>Banca de madera tratada</th><th class="us">Núcleo Costero</th></tr></thead>
+      <tbody>
+        <tr><td>Precio inicial</td><td>$70.000</td><td class="us">$84.000</td></tr>
+        <tr><td>Mantención anual</td><td>Lijar y barnizar: ≈ $15.000 y una tarde de trabajo</td><td class="us">$0 · solo agua y jabón</td></tr>
+        <tr><td>Si se daña una parte</td><td>Reparar a mano o cambiar la banca completa</td><td class="us">Cambias solo esa pieza ($9.000 – $18.000)</td></tr>
+        <tr><td>Sol, lluvia y humedad</td><td>Se agrieta, se decolora y puede pudrirse</td><td class="us">No absorbe agua; color integrado con protección UV</td></tr>
+        <tr><td>Garantía a la intemperie</td><td>No informada</td><td class="us">5 años, por escrito</td></tr>
+        <tr class="total"><td>Costo estimado a 5 años</td><td>≈ $145.000</td><td class="us">$84.000</td></tr>
+      </tbody>
+    </table>
+    <details data-track="garantia_open">
+      <summary>Ver condiciones de la garantía</summary>
+      <p><b>Cubre</b> durante 5 años, con uso normal al aire libre: grietas, pudrición, deformación permanente del asiento y pérdida de color evidente. Reponemos la pieza afectada sin costo.</p>
+      <p><b>No cubre</b>: golpes o daño intencional, fuego o calor directo, y modificaciones hechas al mueble.</p>
+    </details>
+  </div>
+</section>
+
+<section id="piezas" class="alt">
+  <div class="wrap">
+    <h2>Si algo se rompe, cambias solo esa pieza</h2>
+    <p class="sub">La banca se arma con 8 pernos y una llave. Toca una pieza para ver su repuesto.</p>
+    <div class="pieces" role="group" aria-label="Piezas de repuesto">
+      <button type="button" class="piece" aria-pressed="false" data-track="pieza_tabla"><b>Tabla de asiento</b><span class="p">$9.000</span><span class="d">3 por banca · llega en 5 días hábiles</span></button>
+      <button type="button" class="piece" aria-pressed="false" data-track="pieza_pata"><b>Pata lateral</b><span class="p">$18.000</span><span class="d">2 por banca · llega en 5 días hábiles</span></button>
+      <button type="button" class="piece" aria-pressed="false" data-track="pieza_pernos"><b>Kit de 8 pernos inoxidables</b><span class="p">$3.000</span><span class="d">no se oxidan con aire salino</span></button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>De qué está hecha</h2>
+    <div class="material">
+      <div><b>Núcleo de plástico costero</b>Plástico recuperado de playas chilenas, lavado y separado. Va por dentro, donde da volumen y rigidez.</div>
+      <div><b>Piel con protección UV</b>Capa exterior de polietileno reciclado con aditivo UV y color integrado: no se pinta y no se pela.</div>
+      <div><b>Hecha para la intemperie</b>No absorbe agua, no se pudre y no le salen hongos. Se limpia con agua y jabón.</div>
+    </div>
+  </div>
+</section>
+
+<section id="lista" class="alt">
+  <div class="wrap">
+    <h2>Únete a la lista de interés</h2>
+    <p class="sub">La banca todavía está en desarrollo. Si te interesa, deja tus datos y serás de las primeras personas en saber cuándo sale y a qué precio. No se paga nada.</p>
+    <form id="form-lista" novalidate>
+      <div class="full radio-row">
+        <label style="display:block">¿Has tenido que reparar, reemplazar o botar algo de tu patio, terraza o balcón en los últimos 2 años?</label>
+        <label><input type="radio" name="filtro" value="si" required> Sí</label>
+        <label><input type="radio" name="filtro" value="no"> No</label>
+      </div>
+      <div><label for="nombre">Nombre</label><input type="text" id="nombre" name="nombre" required autocomplete="given-name"></div>
+      <div><label for="comuna">Comuna</label><input type="text" id="comuna" name="comuna" required></div>
+      <div><label for="whatsapp">WhatsApp</label><input type="tel" id="whatsapp" name="whatsapp" required placeholder="+56 9 ..." autocomplete="tel"></div>
+      <div><label for="color">Color</label>
+        <select id="color" name="color"><option>Gris roca</option><option>Arena</option><option>Verde alga</option></select>
+      </div>
+      <div class="full"><label for="cuando">A $84.000, ¿cuándo la comprarías?</label>
+        <select id="cuando" name="cuando" required><option value="">Elige una opción</option><option value="disponible">En cuanto esté disponible</option><option value="6meses">En los próximos 6 meses</option><option value="saber_mas">Por ahora solo quiero saber más</option></select>
+      </div>
+      <div class="full"><label class="check"><input type="checkbox" name="acepta" required> Acepto que me escriban por WhatsApp sobre esta banca. Sé que es un producto en desarrollo y que inscribirme no tiene costo ni me obliga a comprar.</label></div>
+      <input type="hidden" name="canal" id="canal">
+      <div class="full"><button class="btn" type="submit" data-track="cta_inscribir">Quiero que me avisen</button></div>
+    </form>
+    <div class="ok-box" id="ok" role="status"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Núcleo Costero es un emprendimiento en etapa de validación: todavía no vendemos ni cobramos. Puedes pedir que te saquemos de la lista cuando quieras. Proyecto de emprendimiento de estudiantes de la Universidad del Desarrollo.</div>
+</footer>
+
+<script>
+  // CONFIGURACIÓN: URL que recibe las inscripciones (Formspree, Google Apps Script, Tally webhook, etc.).
+  // Si queda vacía, la inscripción solo se muestra en pantalla y en la consola.
+  const FORM_ENDPOINT = '';
+
+  const params = new URLSearchParams(location.search);
+  document.getElementById('canal').value = params.get('utm_source') || params.get('canal') || 'directo';
+
+  function track(evento) {
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({ path: 'evento-' + evento, title: evento, event: true });
+    }
+    if (window.gtag) window.gtag('event', evento);
+    console.log('[evento]', evento);
+  }
+  document.querySelectorAll('[data-track]').forEach(el => {
+    const ev = el.tagName === 'DETAILS' ? 'toggle' : 'click';
+    el.addEventListener(ev, () => track(el.dataset.track));
+  });
+  document.querySelectorAll('.piece').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.piece').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+    });
+  });
+
+  document.getElementById('form-lista').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    const datos = Object.fromEntries(new FormData(form).entries());
+    datos.inscripcion = 'NC-' + Date.now().toString(36).toUpperCase().slice(-5);
+    datos.fecha = new Date().toISOString();
+    if (FORM_ENDPOINT) {
+      try {
+        await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(datos) });
+      } catch (err) { console.error(err); }
+    }
+    console.log('[inscripcion]', datos);
+    track('inscripcion_enviada');
+    const ok = document.getElementById('ok');
+    ok.innerHTML = '<b>¡Listo, ' + datos.nombre.replace(/[<>&]/g, '') + '! Quedaste en la lista de interés (N° ' + datos.inscripcion + ').</b><br>No tienes que pagar nada. Te escribiremos por WhatsApp cuando la banca esté disponible; si ya no te interesa, respóndenos «baja».';
+    ok.style.display = 'block';
+    form.style.display = 'none';
+  });
+</script>
+</body>
+</html>
